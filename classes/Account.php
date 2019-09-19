@@ -23,9 +23,6 @@ class Account extends Database{
       $register_errors['username'] = 'maximum 16 characters';
     }
 
-
-
-echo($username);
     // print_r($register_errors);
     if( count($register_errors) == 0 ){
       //hash the password
