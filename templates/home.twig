@@ -4,5 +4,39 @@
     {% include 'partials/head.twig' %}
     <body>
         {% include 'partials/navigation.twig' %}
+        <main class="container bg-light pb-2">
+            {% for article in articles %}
+                {% if loop.first %}
+                    <div class="row py-4">
+                        <div class="col-md-8">
+                            <img class="img-responsive" width="100%" src="https://via.placeholder.com/800x500">
+                        </div>
+                        
+                        <div class="col-md-4">
+                            <h1><a class="stretched-link text-reset" href="#" >{{article.article_title}}</a></h1>
+                            <h5 class="created text-muted">{{article.created|date('d F Y')}}</h5>
+                            <h5 class="created text-muted">{{article.created|date('l, g:i a')}}</h5>
+                            <br/>
+                            <h4>{{article.article_text_content|slice(0,120) ~ '.....'}}</h4>
+                        </div>
+                    </div>
+                
+                <br/>
+                <h2>Recent Articles</h2>
+                <hr/>
+                {% else %}
+                <div class="media position-relative">
+                    <img class="img-responsive mr-3 w-25" width="100%" src="https://via.placeholder.com/800x500">
+                    <div class="media-body w-75">
+                        <h2><a class="stretched-link text-reset" href="#" >{{article.article_title}}</a></h2>
+                        <p class="created text-muted">{{article.created|date('l, d F Y, g:i a')}}</p>
+                        <h5>{{article.article_text_content|slice(0,120) ~ '.....'}}</h5>
+                    </div>
+                </div>
+                <hr/>
+                {% endif %}
+            {% endfor %}
+        </main>
+        {% include 'partials/footer.twig' %}
     </body>
 </html>

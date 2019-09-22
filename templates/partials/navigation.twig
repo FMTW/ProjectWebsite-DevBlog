@@ -1,11 +1,12 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-  <a class="navbar-brand" href="#">Dev-Blog</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
+  <div class="container">
+    <a class="navbar-brand" href="#">Dev-Blog</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggler" aria-controls="navbarToggler" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
 
   <div class="collapse navbar-collapse" id="navbarToggler">
-    <ul class="navbar-nav col-8">
+    <ul class="navbar-nav mr-auto">
       <li class="nav-item">
         <a class="nav-link" href="#">Login</a>
       </li>
@@ -13,9 +14,8 @@
         <a class="nav-link" href="#">Register</a>
       </li>
     </ul>
-    <form class="form-inline col-4">
-      <input class="form-control flex-grow-1 mr-sm-2" type="search" placeholder="Search">
-      <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
+    <form class="form-inline my-2 my-md-0">
+      <input class="form-control" type="text" placeholder="Search" aria-label="Search">
     </form>
   </div>
 </nav>
