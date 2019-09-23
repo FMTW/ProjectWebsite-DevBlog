@@ -14,8 +14,9 @@
         <a class="nav-link" href="register.php">Register</a>
       </li>
     </ul>
-    <form class="form-inline my-2 my-md-0">
-      <input class="form-control" type="text" placeholder="Search" aria-label="Search">
+    <form class="form-inline my-2 my-md-0" method="get" action="search.php">
+      {% set search = (result.query) ? result.query : '' %}
+      <input type="search" name="query" class="form-control"  placeholder="Search" aria-label="Search" value="{{search}}">
     </form>
   </div>
 </nav>
