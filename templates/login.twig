@@ -6,23 +6,33 @@
     <main class="container-fluid">
       <div class="row mt-4">
         <div class="col-md-4 offset-md-4">
-          <form id="register-form" action="login.php" method="post">
+          {% set notvalid = (login.response.success == false ) ? 'was-validated' : '' %}
+          <form id="login-form" action="login.php" method="post" class="{{notvalid}}">
             <h4>Login to your account</h4>
-            <div class="form-group">
+            <div class="form-group" >
               <label for="email">Email</label>
-              <input type="email" id="email" name="email" placeholder="you@example.com" class="form-control">
+              {% set email = (login.email) ? login.email : '' %}
+              {% set validEmail = ( login.errors.email ) ? 'is-invalid' : '' %}
+              <input type="email" id="email" name="email" placeholder="you@example.com" class="form-control {{validEmail}}" value="{{email}}" autocomplete="new-password" >
+              {% if login.errors.email %}
+                <span class="invalid-feedback">{{login.errors.email}}</span>
+              {% endif %}
             </div>
             <div class="form-group">
               <label for="password">Password</label>
-              <input type="password" id="password" name="password" placeholder="minimum 8 characters" class="form-control">
+              {% set validPassword = ( login.errors.password ) ? 'is-invalid' : '' %}
+              <input type="password" id="password" name="password" placeholder="minimum 8 characters" class="form-control {{validPassword}}" autocomplete="new-password">
+              {% if login.errors.password %}
+                <span class="invalid-feedback">{{login.errors.password}}</span>
+              {% endif %}
             </div>
             <button class="btn btn-primary" type="submit">Login</button>
             {% if login.success %}
-              <div class="alert alert-success">
+              <div class="alert alert-success" role="alert">
                 Login successful!
               </div>
             {% elseif login.errors.account or login.errors.system %}
-              <div class="alert alert-warning">
+              <div class="alert alert-warning" role="alert">
                 {{login.errors.account}}
               </div>
             {% endif %}

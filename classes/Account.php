@@ -50,7 +50,7 @@ class Account extends Database{
         }
       }
       catch( Exception $exc ){
-        //error_log( $exc -> getMessage() );
+        // error_log( $exc -> getMessage() );
         //check if it is a duplicate email error
         $message = $exc -> getMessage();
         if( $message !== 'execute failed' ){
@@ -143,10 +143,10 @@ class Account extends Database{
     // check if there are errors
     if( count($errors) > 0 ){
       $response['success'] = false;
-      $reponse['errors'] = $errors;
+      $response['errors'] = $errors;
     }
     else{
-      $reponse['success'] = true;
+      $response['success'] = true;
       $this -> setUserSession( $account['account_id'] );
     }
     return $response;
