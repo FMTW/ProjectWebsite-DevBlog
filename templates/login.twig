@@ -1,9 +1,9 @@
 <!doctype html>
 <html>
   {% include 'partials/head.twig' %}
-  <body>
-    {% include 'partials/navigation.twig' %}
-    <main class="container-fluid">
+  <body class="bg-light">
+    <br/><br/>
+    <main class="container">
       <div class="row mt-4">
         <div class="col-md-4 offset-md-4">
           {% set notvalid = (login.response.success == false ) ? 'was-validated' : '' %}
@@ -26,7 +26,8 @@
                 <span class="invalid-feedback">{{login.errors.password}}</span>
               {% endif %}
             </div>
-            <button class="btn btn-primary" type="submit">Login</button>
+            <button class="btn btn-block btn-primary" type="submit">Login</button>
+            <a class="btn btn-block btn-secondary" href="index.php">Home</a>
             {% if login.success %}
               <div class="alert alert-success" role="alert">
                 Login successful!
@@ -37,6 +38,7 @@
               </div>
             {% endif %}
           </form>
+          <p class="mt-5 mb-3 text-muted text-center">© ProjectWebsite-DevBlog 2019</p>
         </div>
       </div>
     </main>

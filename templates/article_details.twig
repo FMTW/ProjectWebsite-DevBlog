@@ -1,0 +1,44 @@
+<html>
+{% include 'partials/head.twig' %}
+    <style>
+    .iframe-container
+    {
+        position: relative;
+        width: 100%;
+        padding-bottom: 56.25%; 
+        height: 0;
+    }
+    
+    .iframe-container iframe
+    {
+        position: absolute;
+        top:0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+    }
+    </style>
+
+    <body>
+        {% include 'partials/navigation.twig' %}
+        <div class="jumbotron">
+            <div class="container">
+                <h1 class="display-4">{{detail.content.article_title}}</h1>
+                <hr/>
+                <p class="lead">{{detail.content.created|date('l, d F Y h:i:s A')}} By {{detail.content.username}}</p>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                <div class="iframe-container">
+                    <iframe width="560px" height="315px" src="https://www.youtube.com/embed/r2UpIpBS_-s" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                </div>
+
+                {{detail.content.article_text_content|raw}}
+
+            </div> 
+        </div>
+        {% include 'partials/footer.twig' %}
+    </body>
+</html>

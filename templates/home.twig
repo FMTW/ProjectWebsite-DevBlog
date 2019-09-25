@@ -13,9 +13,10 @@
                         </div>
                         
                         <div class="col-md-4">
-                            <h1><a class="stretched-link text-reset" href="#" >{{article.article_title}}</a></h1>
-                            <h5 class="created text-muted">{{article.created|date('d F Y')}}</h5>
-                            <h5 class="created text-muted">{{article.created|date('l, g:i a')}}</h5>
+                            <h1><a class="stretched-link text-reset" href="article_details.php?article_id={{article.article_id}}" >{{article.article_title}}</a></h1>
+                            <p class="text-muted">{{article.created|date('d F Y')}}</p>
+                            <!--<p class="text-muted">{{article.created|date('l, g:i a')}}</p>-->
+                            <h5>{{article.username}}</h5>
                             <br/>
                             <h4>{{article.article_text_content|slice(0,120) ~ '.....'}}</h4>
                         </div>
@@ -28,8 +29,8 @@
                 <div class="media position-relative">
                     <img class="img-responsive mr-3 w-25" width="100%" src="https://via.placeholder.com/800x500">
                     <div class="media-body w-75">
-                        <h2><a class="stretched-link text-reset" href="#" >{{article.article_title}}</a></h2>
-                        <p class="created text-muted">{{article.created|date('l, d F Y, g:i a')}}</p>
+                        <h2><a class="stretched-link text-reset" href="article_details.php?article_id={{article.article_id}}">{{article.article_title}}</a></h2>
+                        <p class="text-muted">{{article.created|date('l, d F Y')}} By {{article.username}}</p>
                         <h5>{{article.article_text_content|slice(0,120) ~ '.....'}}</h5>
                     </div>
                 </div>
