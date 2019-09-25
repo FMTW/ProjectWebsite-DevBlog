@@ -7,7 +7,7 @@
       <div class="row">
         <div class="col-md-4 offset-md-4">
           {% set notvalid = (register.response.success == false ) ? 'was-validated' : '' %}
-          <form id="register-form" action="register.php" method="post" class={{notvalid}}"">
+          <form id="register-form" action="register.php" method="post" class="{{notvalid}}">
             <h4>Register for an account</h4>
             <div class="form-group">
               <label for="username">Username</label>
@@ -37,8 +37,8 @@
             <button class="btn btn-block btn-primary" type="submit">Register</button>
             <a class="btn btn-block btn-secondary" href="index.php">Home</a>
             {% if register.success %}
-              <div class="alert alert-success mt-2 ">
-                Your account has been created!
+              <div class="alert alert-success alert-dismissible fade show" role="alert">
+                <h4 class="alert-heading">Your account has been created!</h4>
               </div>
             {% endif %}
           </form>
