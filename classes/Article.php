@@ -10,7 +10,10 @@ class Article extends Database
 
     public function getArticle() 
     {
-        $query = "SELECT article_title, article_text_content,created FROM `article` ";
+        $query = "SELECT article.article_id, article.article_title, article.article_text_content, article.created, account.username 
+        FROM `article` 
+        INNER JOIN account
+        ON article.account_id = account.account_id";
 
         $statement = $this->connection->prepare($query);
     

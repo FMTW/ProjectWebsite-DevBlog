@@ -143,10 +143,10 @@ class Account extends Database{
     // check if there are errors
     if( count($errors) > 0 ){
       $response['success'] = false;
-      $reponse['errors'] = $errors;
+      $response['errors'] = $errors;
     }
     else{
-      $reponse['success'] = true;
+      $response['success'] = true;
       $this -> setUserSession( $account['account_id'] );
     }
     return $response;

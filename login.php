@@ -10,19 +10,10 @@ if( $_SERVER['REQUEST_METHOD']=='POST' ){
   //create an instance of account class
   $acc = new Account();
   $login = $acc -> login( $email, $password );
-  
 }
 else{
   $login='';
 }
-
-// //create navigation
-// use DevBlog\Navigation;
-
-// $nav = new Navigation();
-// $navigation = $nav -> getNavigation();
-
-
 
 //create twig loader for templates
 $loader = new Twig_Loader_Filesystem('templates');
