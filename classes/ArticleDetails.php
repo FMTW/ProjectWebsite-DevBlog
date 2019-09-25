@@ -21,30 +21,41 @@ class ArticleDetails extends Database{
             $result = $statement->get_result();
             $row = $result->fetch_assoc();
             $this->article_details['content'] = $row;
-            //$this->article_details['images'] = $this->getProductImages( $id );
+            $this->article_details['videos'] = $this->getArticleVideos($id);
+            $this->article_details['images'] = $this->getArticleImages($id);
         }
         return $this->article_details;
     }
 
-    private function getProductImages( $id ) {
-        $_imageQuery = "SELECT 
-        product_image.image_id,
-        image_file_name
-        FROM `product_image`
-        INNER JOIN image
-        ON product_image.image_id = image.image_id
-        WHERE product_id = ? ";
+    private function getArticleVideos($id)
+    {
+        $videoQuery = "SELECT url FROM `video` WHERE article_id = ?";
 
-        $statement = $this -> connection -> prepare( $_imageQuery );
+        $statement = $this -> connection -> prepare( $videoQuery );
         $statement -> bind_param( 'i', $id );
-        $_product_images = array();
+        $article_videos = array();
         if ( $statement -> execute()) {
             $result = $statement -> get_result();
             while ( $row = $result -> fetch_assoc()) {
-                array_push( $_product_images, $row);
+                array_push( $article_videos, $row);
             }
         }
-        return $_product_images;
+        return $article_videos;
+    }
+
+    private function getArticleImages( $id ) {
+        $imageQuery = "SELECT filename FROM `image` WHERE article_id = ?";
+
+        $statement = $this -> connection -> prepare( $imageQuery );
+        $statement -> bind_param( 'i', $id );
+        $article_images = array();
+        if ( $statement -> execute()) {
+            $result = $statement -> get_result();
+            while ( $row = $result -> fetch_assoc()) {
+                array_push( $article_images, $row);
+            }
+        }
+        return $article_images;
     }
 
 
