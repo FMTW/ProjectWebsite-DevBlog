@@ -64,10 +64,25 @@
                     </div>
                     {% endfor %}
                 {% endif %}
-
             </div> 
+
+            <div class="row">
+                <div id="editor"> 
+                    You got an editor!!
+                </div>
+            </div>
         </div>
         {% include 'gbook.php' %}
+
+        <script>$('#editor').trumbowyg();</script>
+
+        <!-- Import jQuery -->
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script>window.jQuery || document.write('<script src="js/vendor/jquery-3.3.1.min.js"><\/script>')</script>
+
+        <!-- Import Trumbowyg -->
+        <script src="trumbowyg/dist/trumbowyg.js"></script>
+
         {% include 'partials/footer.twig' %}
     </body>
 </html>
