@@ -5,7 +5,7 @@ class Database
 {
     protected $connection;
     public function __construct() {
-        $this -> connection = mysqli_connect('localhost', 'user', 'password', 'dev_blog');
+        $this -> connection = mysqli_connect(getenv('dbhost'), getenv('dbuser'), getenv('dbpass'), getenv('dbname'));
     }
 }
 ?>
