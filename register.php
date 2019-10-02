@@ -4,9 +4,6 @@ require('vendor/autoload.php');
 // use aitsydney\Navigation;
 use DevBlog\Account;
 
-// $nav = new Navigation();
-// $nav_items = $nav -> getNavigation();
-
 // if request_method == post, user is submitting the register form
 if( $_SERVER['REQUEST_METHOD'] == 'POST' ){
     $username = $_POST['username'];
