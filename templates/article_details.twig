@@ -31,11 +31,39 @@
 
         <div class="container">
             <div class="row">
-                <div class="iframe-container">
-                    <iframe width="560px" height="315px" src="https://www.youtube.com/embed/r2UpIpBS_-s" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                </div>
+                
+                {% if not detail.videos is empty %}
+                    {% for video in detail.videos %}
+                    <p>This video is {{video.url}}</p>
+                    <div class="iframe-container">
+                        <iframe class="embediframe" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+                        <script type="text/javascript">
+                            var url = "{{video.url}}";
+                            var id = url.split("?v=")[1]; //sGbxmsDFVnE
+
+                            var embedLink = "http://www.youtube.com/embed/" + id;
+
+                            var embededVideo = document.getElementsByClassName("embediframe");
+
+                            embededVideo[{{loop.index0}}].src = embedLink;
+                        </script>
+
+                    </div>
+                    {% endfor %}
+                {% endif %}
 
                 {{detail.content.article_text_content|raw}}
+
+                {% if not detail.images is empty %}
+                <h3>Image Gallery</h3>
+
+                    {% for image in detail.images %}
+                    <div class="my-2"> 
+                        <img class="img-fluid" src="../images/article_6/{{image.filename}}">
+                    </div>
+                    {% endfor %}
+                {% endif %}
 
             </div> 
         </div>
