@@ -2,3 +2,8 @@ SetEnv dbhost oa4.info
 SetEnv dbuser devblog
 SetEnv dbpass AdvancedWeb2019
 SetEnv dbname devblog
+
+#SetEnv dbhost localhost
+#SetEnv dbuser user
+#SetEnv dbpass password
+#SetEnv dbname dev_blog
