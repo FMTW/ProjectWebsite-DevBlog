@@ -1,7 +1,7 @@
 <?php
-namespace aitsydney;
+namespace DevBlog;
 
-use aitsydney\Database;
+use DevBlog\Database;
 
 class Navigation extends Database{
     public $nav_array = array();

@@ -9,11 +9,10 @@
                 <hr/>
                 {% for item in result.items %}
                 <div class="media position-relative">
-                    {# <imgclass="img-responsive mr-3 w-25" width="100%" src="images/{{item.image}}"> #}
                     <img class="img-responsive mr-3 w-25" width="100%" src="https://via.placeholder.com/800x500">
                     <div class="media-body w-75">
-                        <h2><a class="stretched-link text-reset" href="#" >{{item.article_title}}</a></h2>
-                        <p class="created text-muted">{{item.created|date('l, d F Y, g:i a')}}</p>
+                        <h2><a class="stretched-link text-reset" href="article_details.php?article_id={{item.article_id}}" >{{item.article_title}}</a></h2>
+                        <p class="text-muted">{{item.created|date('l, d F Y')}} By {{item.username}}</p>
                         <h5>{{item.article_text_content|slice(0,120) ~ '.....'}}</h5>
                     </div>
                 </div>

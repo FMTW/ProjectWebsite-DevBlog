@@ -1,28 +1,31 @@
 <?php
+require('vendor/autoload.php');
 
-include('input.php');
-include('Database.php');
+use DevBlog\Input;
 
-$content = $_POST['content'];
-$user = $_POST['user'];
+if( $_SERVER['REQUEST_METHOD']=='POST' ){
+  $content = $_POST['content'];
 
-$input = new input();
+  $comment = new Comment();
+  $input = $comment -> input( $content );
+}
+else{
+  $input='';
+}
 
-$is = $input -> post( $content );
-if( $is == false ){
-    die("Comment can not be empty");
-}   
+//create twig loader
+$loader = new Twig_Loader_Filesystem('templates');
 
-$is = $input -> post( $user );
-if( $is == false ){
-    die("User name can not be empty");
-} 
+//create twig environment
+$twig = new Twig_Environment($loader);
 
-// var_dump( $content, $user );
+//load a twig template
+$template = $twig -> load('comment.twig');
 
-$time = time();
-$is = $db -> query("INSERT INTO message ( content, user, intime ) VALUES ( '{$content}', '{$user}', '{$time}' )" );
-// var_dump( $is );
-header("location: gbook.php");
+//pass values to twig
+echo $template ->render([
+    
+    'response' => $input
+]);
 
 ?>

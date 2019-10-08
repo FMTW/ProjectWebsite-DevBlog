@@ -13,57 +13,57 @@ class Account extends Database{
     $register_errors = array();
     $register_response = array();
     if( strlen($password) < 8 ){
-          $register_errors['password'] = 'minimum 8 characters';
-        }
-        if( filter_var($email, FILTER_VALIDATE_EMAIL) == false ){
-          $register_errors['email'] = 'invalid email address';
-        }
+      $register_errors['password'] = 'minimum 8 characters';
+    }
+    if( filter_var($email, FILTER_VALIDATE_EMAIL) == false ){
+      $register_errors['email'] = 'invalid email address';
+    }
         
-        if( strlen($username) > 16){
-          $register_errors['username'] = 'maximum 16 characters';
-        }
+    if( strlen($username) > 16){
+       $register_errors['username'] = 'maximum 16 characters';
+    }
 
-        print_r($register_errors);
-        if( count($register_errors) == 0 ){
-          //hash the password
-          $hash = password_hash( $password, PASSWORD_DEFAULT );
-          //generate account id
-          $id = $this -> createAccountId();
-          //query to insert into database
-          $query = "
-            INSERT INTO account (account_id,username,email,password,created,accessed)
+    // print_r($register_errors);
+    if( count($register_errors) == 0 ){
+      //hash the password
+      $hash = password_hash( $password, PASSWORD_DEFAULT );
+      //generate account id
+      $id = $this -> createAccountId();
+      //query to insert into database
+      $query = "
+        INSERT INTO account (account_id,username,email,password,created,accessed)
             VALUES( UNHEX(?), ?, ?, ?, NOW(), NOW() )
-          ";
-          try{
-            $statement = $this->connection->prepare($query);
-            if( $statement == false ){
-              throw(new Exception('query failed') );
-            }
-            $statement -> bind_param('ssss', $id, $username, $email, $hash );
-            if( $statement -> execute() == false ){
-              throw( new Exception('execute failed') );
-            }
-            else{
-              //account is created
-              $register_response['success'] = true;
-              $this -> setUserSession( $id );
-            }
-          }
-          catch( Exception $exc ){
-            // error_log( $exc -> getMessage() );
-            //check if it is a duplicate email error
-            $message = $exc -> getMessage();
-            if( $message != 'execute failed' ){
-              error_log( $message );
-              $register_errors['system'] = 'Something went terribly wrong';
-            }
-            else{
-              $register_errors['email'] = 'Your email is already used';
-            }
-          }
+      ";
+      try{
+        $statement = $this->connection->prepare($query);
+        if( $statement == false ){
+          throw(new Exception('query failed') );
+        }
+        $statement -> bind_param('ssss', $id, $username, $email, $hash );
+        if( $statement -> execute() == false ){
+          throw( new Exception('execute failed') );
         }
         else{
-          //return error messages
+          //account is created
+          $register_response['success'] = true;
+          $this -> setUserSession( $id );
+        }
+      }
+      catch( Exception $exc ){
+        // error_log( $exc -> getMessage() );
+        //check if it is a duplicate email error
+        $message = $exc -> getMessage();
+        if( $message != 'execute failed' ){
+          error_log( $message );
+          $register_errors['system'] = 'Something went terribly wrong';
+        }
+        else{
+          $register_errors['email'] = 'Your email is already used';
+        }
+      }
+    }
+    else{
+      //return error messages
           $register_response['errors'] = $register_errors;
           $register_response['success'] = false;
           //return what the user wrote in the email field
