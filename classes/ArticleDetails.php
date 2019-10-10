@@ -27,7 +27,7 @@ class ArticleDetails extends Database{
         return $this->article_details;
     }
 
-    private function getArticleVideos($id)
+    public function getArticleVideos($id)
     {
         $videoQuery = "SELECT url FROM `video` WHERE article_id = ?";
 
@@ -43,7 +43,7 @@ class ArticleDetails extends Database{
         return $article_videos;
     }
 
-    private function getArticleImages( $id ) {
+    public function getArticleImages( $id ) {
         $imageQuery = "SELECT filename FROM `image` WHERE article_id = ?";
 
         $statement = $this -> connection -> prepare( $imageQuery );
@@ -57,8 +57,6 @@ class ArticleDetails extends Database{
         }
         return $article_images;
     }
-
-
 
 }
 ?>

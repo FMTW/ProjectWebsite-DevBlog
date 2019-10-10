@@ -1,17 +1,19 @@
 <?php
 require('vendor/autoload.php');
 
-use DevBlog\Input;
+use DevBlog\Comment;
+$comment = new Comment();
+
+
 
 if( $_SERVER['REQUEST_METHOD']=='POST' ){
   $content = $_POST['content'];
-
-  $comment = new Comment();
   $input = $comment -> input( $content );
 }
 else{
   $input='';
 }
+
 
 //create twig loader
 $loader = new Twig_Loader_Filesystem('templates');
@@ -23,9 +25,8 @@ $twig = new Twig_Environment($loader);
 $template = $twig -> load('comment.twig');
 
 //pass values to twig
-echo $template ->render([
-    
-    'response' => $input
+echo $template ->render([ 
+    'input' => $input
 ]);
 
 ?>

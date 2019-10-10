@@ -72,7 +72,6 @@
                 </div>
             </div>
         </div>
-        {% include 'comment.twig' %}
 
         <script>$('#editor').trumbowyg();</script>
 
@@ -82,6 +81,26 @@
 
         <!-- Import Trumbowyg -->
         <script src="trumbowyg/dist/trumbowyg.js"></script>
+
+        <hr/>
+        <div class="container bg-light pb-2">
+    <h4>Comment</h4>
+
+    <form id="test-form" method="post" >
+        <textarea type="content" name="content" placeholder="write comment" class="form-control" value="{{input}}"></textarea>
+
+        <button class="btn btn-primary mt-2">Comment</button>
+    </form>
+
+    {% for contens in contents %}
+        <div class="media-body w-75">
+            <hr/>
+            <h4>{{contens.created}}</h4>
+            <h4>{{contens.username}}</h4>
+            <p>{{contens.content}}</p>
+        </div>
+    {% endfor %}
+</div>
 
         {% include 'partials/footer.twig' %}
     </body>
