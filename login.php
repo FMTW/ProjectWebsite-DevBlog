@@ -10,6 +10,7 @@ if( $_SERVER['REQUEST_METHOD']=='POST' ){
   //create an instance of account class
   $acc = new Account();
   $login = $acc -> login( $email, $password );
+  header('location: index.php');
 }
 else{
   $login='';

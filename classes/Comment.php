@@ -14,20 +14,19 @@ class Comment extends Database{
         return ( isset($_SESSION['auth']) ) ? $_SESSION['auth'] : false;
     }
 
-    public function getAccountUsername($id){
-        $usernameQuery = "SELECT account.username 
-        FROM account
-        INNER JOIN article
-        ON article.account_id = account.account_id
-        WHERE article.article_id = ?";
-
-        $statement = $this->connection->prepare($usernameQuery);
-        $statement -> bind_param( 'i' , $id );
-        if ($statement->execute()){
-            $result = $statement->get_result();
-            
-            $username = $result->fetch_assoc();
-            return $username;
+    public function getAccountUsername(){
+        if( !$this -> getUserAuthStatus() ){
+            die ("please login first!");
+        }else{         
+            $id = $this ->getUserAuthStatus();
+            $usernameQuery = "SELECT username FROM account WHERE account_id = UNHEX( ? )";
+            $statement = $this->connection->prepare($usernameQuery);
+            $statement -> bind_param('s',$id);
+            if ($statement->execute()){
+                $result = $statement->get_result();    
+                $username = $result->fetch_assoc();
+                return $username;
+            }
         }
     }
 

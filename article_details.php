@@ -13,20 +13,19 @@ use DevBlog\Comment;
 $comment = new Comment();
 $showConent = $comment -> getContent($_GET['article_id']);
 
+$getUsername = $comment->getAccountUsername();
+$username = implode($getUsername);
 
-// $getUsername = $comment->getAccountUsername($_GET['account_id']);
-// $username = implode($getUsername);
-
+$id = $_GET['article_id'];
 if( $_SERVER['REQUEST_METHOD']=='POST' ){
   $content = $_POST['content'];
-  $input = $comment -> input($content,$username,$_GET['article_id'] );
+  $input = $comment -> input($content,$username, $_GET['article_id'] );
+  header("location: article_details.php?article_id=$id"  );
 }
 else{
   $input='';
 }
 
-print_r($_GET['article_id']);
-print_r($_GET['account_id']);
 $loader = new Twig_Loader_Filesystem("templates");
 $twig = new Twig_Environment($loader);
 $template = $twig->load('article_details.twig');
@@ -38,5 +37,5 @@ echo $template->render([
     'input' => $input,
     'contents' => $showConent
 ]);
-
+// heard("location:  article_details.php");
 ?>
