@@ -8,12 +8,11 @@
         <button class="btn btn-primary mt-2">Comment</button>
     </form>
 
-    {% for contens in contents %}
+    {% for content in contents %}
         <div class="media-body w-75">
             <hr/>
-            <h4>{{contens.created}}</h4>
-            <h4>{{contens.username}}</h4>
-            <p>{{contens.content}}</p>
+            <h4>{{content.content}}</h4>
+            <p>{{content.username}} - {{contens.created|date('d F Y')}}</p>
         </div>
     {% endfor %}
 </div>

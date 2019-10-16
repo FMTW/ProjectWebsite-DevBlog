@@ -13,6 +13,7 @@ if( $_SERVER['REQUEST_METHOD'] == 'POST' ){
     //create instance of account class
     $account = new Account();
     $register = $account -> register($username,$email,$password);
+    header('location: index.php');
 }
 else{
     $register = '';

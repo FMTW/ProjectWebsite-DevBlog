@@ -37,5 +37,4 @@ echo $template->render([
     'input' => $input,
     'contents' => $showConent
 ]);
-// heard("location:  article_details.php");
 ?>
