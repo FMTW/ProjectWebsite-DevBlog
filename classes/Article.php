@@ -10,8 +10,19 @@ class Article extends Database
 
     public function getArticle() 
     {
-        $query = "SELECT article.article_id, article.article_title, article.article_text_content, article.created, account.username 
-        FROM `article` 
+        // $query = "SELECT article.article_id, article.article_title, article.article_text_content, article.created, account.username 
+        // FROM `article` 
+        // INNER JOIN account
+        // ON article.account_id = account.account_id";
+
+        $query = "SELECT
+        @article_id := article.article_id as article_id,
+        article.article_title,
+        article.article_text_content,
+        @image_id := ( SELECT image_id FROM image WHERE article_id = @article_id LIMIT 1) as image_id,
+        ( SELECT filename FROM image WHERE image_id = @image_id ) as filename,
+        account.username
+        FROM article
         INNER JOIN account
         ON article.account_id = account.account_id";
 
@@ -25,6 +36,10 @@ class Article extends Database
             }
             return $articleArray;
         }
+    }
+
+    public function getArticleBannerImage(){
+
     }
 }
 ?>

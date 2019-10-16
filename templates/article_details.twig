@@ -31,10 +31,8 @@
 
         <div class="container">
             <div class="row">
-                
                 {% if not detail.videos is empty %}
                     {% for video in detail.videos %}
-                    <p>This video is {{video.url}}</p>
                     <div class="iframe-container">
                         <iframe class="embediframe" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
@@ -52,55 +50,48 @@
                     </div>
                     {% endfor %}
                 {% endif %}
+            </div>
 
+            </br>
+
+            <div class="row">
                 {{detail.content.article_text_content|raw}}
+            </div>
+
+            </br>
 
                 {% if not detail.images is empty %}
                 <h3>Image Gallery</h3>
 
+                </br>
+
                     {% for image in detail.images %}
                     <div class="my-2"> 
-                        <img class="img-fluid" src="../images/article_6/{{image.filename}}">
+                        <img class="img-fluid img-responsive" src="../images/article_{{detail.content.article_id}}/{{image.filename}}">
                     </div>
                     {% endfor %}
                 {% endif %}
-            </div> 
-
-            <div class="row">
-                <div id="editor"> 
-                    You got an editor!!
-                </div>
-            </div>
-        </div>
-
-        <script>$('#editor').trumbowyg();</script>
-
-        <!-- Import jQuery -->
-        <script src="//ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-        <script>window.jQuery || document.write('<script src="js/vendor/jquery-3.3.1.min.js"><\/script>')</script>
-
-        <!-- Import Trumbowyg -->
-        <script src="trumbowyg/dist/trumbowyg.js"></script>
-
-        <hr/>
-        <div class="container bg-light pb-2">
-    <h4>Comment</h4>
-
-    <form id="test-form" method="post" >
-        <textarea type="content" name="content" placeholder="write comment" class="form-control" value="{{input}}"></textarea>
-
-        <button class="btn btn-primary mt-2">Comment</button>
-    </form>
-
-    {% for contens in contents %}
-        <div class="media-body w-75">
+            
             <hr/>
-            <h4>{{contens.created}}</h4>
-            <h4>{{contens.username}}</h4>
-            <p>{{contens.content}}</p>
-        </div>
-    {% endfor %}
-</div>
+            
+            <div class="container bg-light pb-2">
+                <h4>Comment</h4>
+
+                <form id="test-form" method="post" >
+                    <textarea type="content" name="content" placeholder="write comment" class="form-control" value="{{input}}"></textarea>
+
+                    <button class="btn btn-primary mt-2">Comment</button>
+                </form>
+
+                {% for contens in contents %}
+                    <div class="media-body w-75">
+                        <hr/>
+                        <h4>{{contens.created}}</h4>
+                        <h4>{{contens.username}}</h4>
+                        <p>{{contens.content}}</p>
+                    </div>
+                {% endfor %}
+            </div>
 
         {% include 'partials/footer.twig' %}
     </body>

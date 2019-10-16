@@ -9,7 +9,7 @@
                 {% if loop.first %}
                     <div class="row py-4">
                         <div class="col-md-8">
-                            <img class="img-responsive" width="100%" src="https://via.placeholder.com/800x500">
+                            <img class="img-responsive" width="100%" src="../images/article_{{article.article_id}}/{{article.filename}}">
                         </div>
                         
                         <div class="col-md-4">
@@ -27,11 +27,11 @@
                 <hr/>
                 {% else %}
                 <div class="media position-relative">
-                    <img class="img-responsive mr-3 w-25" width="100%" src="https://via.placeholder.com/800x500">
+                    <img class="img-responsive mr-3 w-25" width="100%" src="../images/article_{{article.article_id}}/{{article.filename}}">
                     <div class="media-body w-75">
                         <h2><a class="stretched-link text-reset" href="article_details.php?article_id={{article.article_id}}">{{article.article_title}}</a></h2>
                         <p class="text-muted">{{article.created|date('l, d F Y')}} By {{article.username}}</p>
-                        <h5>{{article.article_text_content|slice(0,120) ~ '.....'}}</h5>
+                        <h5>{{article.article_text_content|raw|slice(0,120) ~ '.....'}}</h5>
                     </div>
                 </div>
                 <hr/>
