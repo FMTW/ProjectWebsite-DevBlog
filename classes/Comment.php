@@ -7,7 +7,7 @@ class Comment extends Database{
         parent::__construct();
     }
 
-    private function getUserAuthStatus(){
+    public function getUserAuthStatus(){
         if( session_status() == PHP_SESSION_NONE ){
         session_start();
         }
@@ -16,8 +16,8 @@ class Comment extends Database{
 
     public function getAccountUsername(){
         if( !$this -> getUserAuthStatus() ){
-            die ("please login first!");
-        }else{         
+            echo ('Please loginasdfsd first!');
+        }else{
             $id = $this ->getUserAuthStatus();
             $usernameQuery = "SELECT username FROM account WHERE account_id = UNHEX( ? )";
             $statement = $this->connection->prepare($usernameQuery);
@@ -25,26 +25,30 @@ class Comment extends Database{
             if ($statement->execute()){
                 $result = $statement->get_result();    
                 $username = $result->fetch_assoc();
-                return $username;
-            }
+                return $username; 
+            }       
         }
     }
 
-    public function input( $content, $username, $id){ 
+    public function input( $content,$id){ 
+        
         if( !$this -> getUserAuthStatus() ){
-            die('Please login first!');
+            die('Please loginasdfsd first!');
         }else{
+            $getUsername = $this->getAccountUsername();
+            $username = implode($getUsername);
+            
             $query = "INSERT INTO comment ( content, username,created,article_id ) VALUES ( ?, ? ,NOW(), ? ) ";
 
             if ( $content == '' ){
-                echo ("comment com not be empty");
+                die ("comment com not be empty");
             }else{
                 $statement = $this->connection->prepare($query);
                 
                 $statement -> bind_param('ssi', $content,$username,$id);
 
                 if( $statement -> execute() == false ){
-                    echo ('query failed') ;
+                    die ('query failed') ;
                 }           
             }
         }

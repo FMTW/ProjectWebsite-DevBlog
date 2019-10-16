@@ -10,10 +10,15 @@ if( $_SERVER['REQUEST_METHOD']=='POST' ){
   //create an instance of account class
   $acc = new Account();
   $login = $acc -> login( $email, $password );
-  header('location: index.php');
 }
 else{
   $login='';
+}
+
+use DevBlog\Comment;
+$account = new Comment();
+if ( $account -> getUserAuthStatus() ){
+  header('location: index.php');
 }
 
 //create twig loader for templates

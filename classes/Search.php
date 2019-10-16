@@ -20,13 +20,15 @@ class Search extends Database{
       return;
     }
     $search_param = "%" . $this -> search_query . "%";
-    $query = "
-      SELECT * FROM article 
-      WHERE article_title like ?
-      or article_text_content like ?
-    ";
+    $query = "SELECT @article_id := article.article_id as article_id, article.article_title, article.article_text_content, article.created, account.username,
+    @image_id := ( SELECT image_id FROM image WHERE article_id = @article_id LIMIT 1) as image_id,
+            ( SELECT filename FROM image WHERE image_id = @image_id ) as filename
+    FROM article 
+    INNER JOIN account
+    ON article.account_id = account.account_id
+    WHERE article.article_title LIKE ?";
     $statement = $this -> connection -> prepare( $query );
-    $statement -> bind_param('ss', $search_param, $search_param );
+    $statement -> bind_param('s', $search_param);
     try{
       if( $statement -> execute() == false ){
         throw( new Exception('search error') );

@@ -74,8 +74,26 @@
             
             <hr/>
             
-            {% include 'comment.twig' %}
+            <hr/>
+            <div class="container bg-light pb-2">
+                <h4>Comment</h4>
 
+                <form id="test-form"  method="post" >
+                    <textarea type="content" name="content" placeholder="write comment" class="form-control" value="{{input}}"></textarea>
+
+                    <button class="btn btn-primary mt-2">Comment</button>
+                </form>
+
+                {% for content in contents %}
+                    <div class="media-body w-75">
+                        <hr/>
+                        <h4>{{content.content}}</h4>
+                        <p>{{content.username}} - {{content.created|date('d F Y')}}</p>
+                    </div>
+                {% endfor %}
+            </div>
+
+        </div>
         {% include 'partials/footer.twig' %}
     </body>
 </html>

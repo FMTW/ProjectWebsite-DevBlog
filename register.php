@@ -13,11 +13,17 @@ if( $_SERVER['REQUEST_METHOD'] == 'POST' ){
     //create instance of account class
     $account = new Account();
     $register = $account -> register($username,$email,$password);
-    header('location: index.php');
 }
 else{
     $register = '';
 }
+
+use DevBlog\Comment;
+$account = new Comment();
+if ($account -> getUserAuthSttus() ){
+  header('location: index.php');
+}
+
 
 //create twig loader
 $loader = new Twig_Loader_Filesystem('templates');

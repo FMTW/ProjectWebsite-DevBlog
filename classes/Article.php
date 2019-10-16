@@ -10,11 +10,6 @@ class Article extends Database
 
     public function getArticle() 
     {
-        // $query = "SELECT article.article_id, article.article_title, article.article_text_content, article.created, account.username 
-        // FROM `article` 
-        // INNER JOIN account
-        // ON article.account_id = account.account_id";
-
         $query = "SELECT
         @article_id := article.article_id as article_id,
         article.article_title,

@@ -1,25 +1,24 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
   <div class="container">
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggler" aria-controls="navbarToggler" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
+    {% for item in navigation.navigation %}
+      {% if loop.first %}
+        <a class="navbar-brand" href="{{item.url}}">Dev-Blog</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggler" aria-controls="navbarToggler" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
 
-  {% for item in navigation.navigation %}
-    {% set active = ( item.url == navigation.active ) ? 'active' : '' %}
-    <a class="navbar-brand {{active}}" href="{{item.url}}">{{item.menu}}</a>
-    
-
-  {# <div class="collapse navbar-collapse" id="navbarToggler">
-    <ul class="navbar-nav mr-auto">
-      <li class="nav-item">
-        <a class="nav-link {{active}}" href="{{item.url}}">{{item.menu}}</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link {{active}}" href="{{item.url}}">{{item.menu}}</a>
-      </li>
-    </ul> #}
+      <div class="collapse navbar-collapse" id="navbarToggler">
+        <ul class="navbar-nav mr-auto">
+      {% else %}
+          {% set active = ( item.url == navigation.active ) ? 'active' : '' %}
+          <li class="nav-item">
+            <a class="nav-link {{active}}" href="{{item.url}}">{{item.menu}}</a>
+          </li>
+      {% endif %}
     {% endfor %}
-
+        </ul>
+      </div>
+      
     <form class="form-inline my-2 my-md-0" method="get" action="search.php">
       {% set search = (result.query) ? result.query : '' %}
       <input type="search" name="query" class="form-control"  placeholder="Search" aria-label="Search" value="{{search}}">
