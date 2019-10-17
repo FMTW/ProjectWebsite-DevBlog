@@ -16,7 +16,7 @@ class Comment extends Database{
 
     public function getAccountUsername(){
         if( !$this -> getUserAuthStatus() ){
-            echo ('Please loginasdfsd first!');
+            echo ('Please login first!');
         }else{
             $id = $this ->getUserAuthStatus();
             $usernameQuery = "SELECT username FROM account WHERE account_id = UNHEX( ? )";
@@ -31,9 +31,9 @@ class Comment extends Database{
     }
 
     public function input( $content,$id){ 
-        
+
         if( !$this -> getUserAuthStatus() ){
-            die('Please loginasdfsd first!');
+            die('Please login first!');
         }else{
             $getUsername = $this->getAccountUsername();
             $username = implode($getUsername);
